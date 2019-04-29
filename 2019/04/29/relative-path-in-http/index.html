@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.8.0">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+
+    
+
+    
+        <meta name="description" content="LesterWeng`s Blog">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="LesterWeng">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="相对路径在http中的应用">
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="LesterWeng`s Blog">
+    
+
+    <!--Open Graph Site Name-->
+        <meta property="og:site_name" content="LesterWeng | Blog">
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article">
+    
+
+    <!--Page Cover-->
+    
+    
+        <meta property="og:image" content="https://lesterweng.github.io/img/home-bg.jpg">
+    
+
+        <meta name="twitter:card" content="summary_large_image">
+
+    
+
+    
+        <meta name="twitter:image" content="https://lesterweng.github.io/img/home-bg.jpg">
+    
+
+    <!-- Title -->
+    
+    <title>相对路径在http中的应用 - LesterWeng | Blog</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet">
+
+    <!-- Google Analytics -->
+    
+
+
+    <!-- favicon -->
+    
+    <link rel="icon" href="/img/favicon.jpg">
+    
+
+</head>
+
+
+<body>
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">LesterWeng | Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags">
+                            
+                                Tags
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories">
+                            
+                                Categories
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://github.com/LesterWeng/LesterWeng.github.io">
+                            
+                                <i class="fa fa-github fa-stack-2x"></i>
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>相对路径在http中的应用</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2019-04-29
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h2 id="由来"><a href="#由来" class="headerlink" title="由来"></a>由来</h2><p>工作中一个项目可能位于三种环境：开发、测试、生产，而项目所部署在的这三个环境的地址可能存在<code>层级</code>的差异，为了区分这三种环境，我们可能的做法：</p>
+<ol>
+<li>分别对三种环境做区分处理，配置相应的绝对路径，包括各种路径，如 Ajax 的路径，请求的图片、文件等资源的路径等等</li>
+<li>考虑使用相对路径</li>
+</ol>
+<p>由于第一种方式需要写配置文件对不同环境做规划，较麻烦，不在必要的情况下不建议使用，也就有了本文。<br><br></p>
+<h2 id="使用举例"><a href="#使用举例" class="headerlink" title="使用举例"></a>使用举例</h2><p>三种环境下项目所部署的地址分别举例如下：<br>开发：<code>http://localhost:8080</code><br>测试：<code>http://example-test</code><br>生产：<code>http://website/example-prod</code></p>
+<h3 id="1-获取资源"><a href="#1-获取资源" class="headerlink" title="1.获取资源"></a>1.获取资源</h3><p><code>/static/img/logo.png</code><br><code>static/img/logo.png(./static/img/logo.png)</code><br>如上例，前者为绝对路径，后者为相对路径，在开发和测试环境下二者没有什么区别，而当部署在生产环境下时，前者写法就会发生错误（404 Not Found）</p>
+<h3 id="2-Ajax-请求"><a href="#2-Ajax-请求" class="headerlink" title="2.Ajax 请求"></a>2.Ajax 请求</h3><p><code>/user/login</code><br><code>user/login</code><br>效果同上，使用相对路径可避免出错，需要注意的是若为前后端分离的项目，前后端地址必然不同，此时需要全局给相对路径添加上后台项目地址的前缀，拼成绝对路径，如：<code>http://backend/announcement</code> + <code>user/login</code><br><br></p>
+<h2 id="html、css、js-中的相对与绝对路径"><a href="#html、css、js-中的相对与绝对路径" class="headerlink" title="html、css、js 中的相对与绝对路径"></a>html、css、js 中的相对与绝对路径</h2><p><strong>相对路径</strong> 相对于该项目（index.html）所部署在的地址,如部署在<code>http://website/example-prod</code>，则<code>user/login</code>和<code>static/img/logo.png</code>分别指向<code>http://website/example-prod/user/login</code>、<code>http://website/example-prod/static/img/logo.png</code></p>
+<p><strong>绝对路径</strong> 相对于该项目（index.html）所部署在的地址的’根目录’，同样是部署在<code>http://website/example-prod</code>，<code>/user/login</code>和<code>/static/img/logo.png</code>分别指向<code>http://website/user/login</code>、<code>http://website/static/img/logo.png</code></p>
+<p>如果有幸帮助到你，还请<a href="https://github.com/LesterWeng/LesterWeng.github.io" target="_blank" rel="noopener"><font color="#ff6000">Star</font></a>以支持:)</p>
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center">
+            
+          <li>
+            <a href="https://github.com/LesterWeng" target="_blank">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+             
+        </ul>
+        <p class="copyright text-muted">
+          &copy; 2019 LesterWeng<br>
+        </p>
+      </div>
+    </div>
+  </div>
+  
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <div style="text-align: center;font-size: 10px">
+    <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">本站访客数<span id="busuanzi_value_site_uv"></span>人</span>
+  </div>
+  
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>
